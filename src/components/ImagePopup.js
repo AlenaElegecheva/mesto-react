@@ -1,4 +1,4 @@
-function PopupImage(props) {
+function ImagePopup(props) {
 
   return(
     <div className={`popup popup_image ${ props.isOpen ? "popup_opened" : ""}`} onClick={props.onClose}>
@@ -11,4 +11,4 @@ function PopupImage(props) {
   )
 }
 
-export default PopupImage;
+export default ImagePopup;

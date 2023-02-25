@@ -4,7 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import '../index.css';
-import PopupImage from './PopupImage';
+import ImagePopup from './ImagePopup';
 
 
 function App() {
@@ -80,7 +80,7 @@ function App() {
       </PopupWithForm>
 
       {/* <!--Попап картинки--> */}
-      <PopupImage card={selectedCard} isOpen={imagePopupOpen} onClose={closePopups}></PopupImage>
+      <ImagePopup card={selectedCard} isOpen={imagePopupOpen} onClose={closePopups}></ImagePopup>
 
       {/* <!--Попап удаления карточки--> */}
       <PopupWithForm
