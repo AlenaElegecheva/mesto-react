@@ -26,10 +26,7 @@ class Api {
   setUsersData(data) {
     return fetch(this._baseUrl + '/users/me', {
       method: 'PATCH',
-      body: JSON.stringify({
-        name: data.username,
-        about: data.aboutme
-      }),
+      body: JSON.stringify(data),
       headers: {
         authorization: this._headers,
         'Content-Type': 'application/json'
@@ -51,9 +48,7 @@ class Api {
   setAvatar = (data) => {
     return fetch(this._baseUrl + '/users/me/avatar', {
       method: 'PATCH',
-      body: JSON.stringify({
-        avatar: data.avatar
-      }),
+      body: JSON.stringify(data),
       headers: {
         authorization: this._headers,
         'Content-Type': 'application/json'
@@ -62,19 +57,9 @@ class Api {
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
 
-  deleteLikeCards = (_id) => {
+  changeLikeCardStatus(_id, isLiked) {
     return fetch(this._baseUrl + '/cards/' + _id + '/likes', {
-      method: 'DELETE',
-      headers: {
-        authorization: this._headers,
-      }
-    })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-  }
-
-  putLikeCards(_id) {
-    return fetch(this._baseUrl + '/cards/' + _id + '/likes', {
-      method: 'PUT',
+      method: isLiked ? 'PUT' : 'DELETE',
       headers: {
         authorization: this._headers,
       }
@@ -85,10 +70,7 @@ class Api {
   createCard(data) {
     return fetch(this._baseUrl + '/cards', {
       method: 'POST',
-      body: JSON.stringify({
-        name: data.place,
-        link: data.src
-      }),
+      body: JSON.stringify(data),
       headers: {
         authorization: this._headers,
         'Content-Type': 'application/json'
