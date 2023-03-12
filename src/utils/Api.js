@@ -5,22 +5,29 @@ class Api {
 
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  };
+  
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
       headers: {
         authorization: this._headers,
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then(this._checkResponse)
   }
 
-  getUsersData () {
+  getUsersData() {
     return fetch(this._baseUrl + '/users/me', {
       headers: {
         authorization: this._headers,
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then(this._checkResponse)
   }
 
   setUsersData(data) {
@@ -32,7 +39,7 @@ class Api {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then(this._checkResponse)
   }
 
   deleteCards(_id) {
@@ -42,7 +49,7 @@ class Api {
         authorization: this._headers,
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then(this._checkResponse)
   }
 
   setAvatar = (data) => {
@@ -54,7 +61,7 @@ class Api {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then(this._checkResponse)
   }
 
   changeLikeCardStatus(_id, isLiked) {
@@ -64,7 +71,7 @@ class Api {
         authorization: this._headers,
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then(this._checkResponse)
   }
 
   createCard(data) {
@@ -76,7 +83,7 @@ class Api {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .then(this._checkResponse)
   }
 }
 
